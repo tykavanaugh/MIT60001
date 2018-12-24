@@ -1,0 +1,25 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Dec 24 07:02:32 2018
+
+MIT Problem set Zero
+
+@author: BlackBox
+"""
+
+#Problem 1: Write a program that does the following in order:
+#1. Asks the user to enter a number “x”
+#2. Asks the user to enter a number “y”
+#3. Prints out number “x”, raised to the power “y”.
+#4. Prints out the log (base 2) of “x”.
+
+import math
+
+def problemOne():
+    x = input('Enter number for x ')
+    y = input('Enter number for y ')
+    x,y = int(x),int(y)
+    print('X raised to the power of Y: {}.'.format(pow(x,y)))
+    print('Base 2 Log of X: {}'.format((math.log2(x))))
+    
