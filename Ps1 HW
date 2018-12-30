@@ -7,8 +7,6 @@ MIT PS1 HW
 
 @author: BlackBox
 """
-import math
-import sys
 
 #Part A
 def partA(annualSalary=120000,percentSaved=.1,cost=1000000):
@@ -40,7 +38,38 @@ def partB(annualSalary=120000,percentSaved=.05,cost=500000,raisePercent=.03):
             annualSalary = annualSalary + (annualSalary * raisePercent)
     print('Number of months: {}'.format((months)))
 
-def partC(annualSalary=120000,percentSaved=.05,cost=500000,raisePercent=.03):
+def partCabortion(annualSalary=150000):
+    bisectionSteps = 0
+    while (bisectionSteps > 100):
+        print('Loop detected')
+        return(None)
+    a = 0
+    b = 1
+    midpoint = (a+b) / 2
+    def calculate(annualSalary,percentSaved):
+        currentSavings = 0
+        downPayment = 250000
+        while (currentSavings < downPayment):
+            months = 0
+            raisePercent = .07
+            months += 1
+            currentSavings += ((currentSavings*.04)/12)
+            currentSavings += ((annualSalary / 12) * percentSaved)
+            if ((months+1) % 6) == True:
+                annualSalary = annualSalary + (annualSalary * raisePercent)
+            return(months)
+    while (calculate(annualSalary,midpoint)) < 36:
+        b = midpoint
+        midpoint = (a+b) / 2
+        bisectionSteps += 1
+        print(midpoint)
+    while (calculate(annualSalary,midpoint)) > 36:
+        a = midpoint
+        midpoint = (midpoint+b) / 2
+        bisectionSteps += 1
+        print(midpoint)
+
+def months(annualSalary=75000,percentSaved=.05,cost=1000000,raisePercent=.07):
     #annualSalary = float(input('Annual Salary: '))
     #percentSaved = float(input('Percent Saved in Decimal: '))
     #cost = float(input('Enter cost of home: '))
@@ -54,4 +83,26 @@ def partC(annualSalary=120000,percentSaved=.05,cost=500000,raisePercent=.03):
         currentSavings += ((annualSalary / 12) * percentSaved)
         if ((months+1) % 6) == True:
             annualSalary = annualSalary + (annualSalary * raisePercent)
-    print('Number of months: {}'.format((months)))
+    return(months)
+    
+def bisection(salary):
+    high = 1
+    low = 0
+    loop = True
+    tracker = 0
+    if months(salary,1) > 36:
+        print("Not possible")
+        return None
+    while loop:
+        tracker += 1
+        midpoint = (high+low) / 2
+        if months(annualSalary=salary,percentSaved=midpoint) == 36:
+            print('For {} it will take {} put away to achieve the goal in 36 months'.format(salary,midpoint))
+            print('It took {} searches to complete process'.format(tracker))
+            loop = False
+        if months(salary,midpoint) < 36:
+            print(midpoint)
+            high = midpoint
+        if months(salary,midpoint) > 36:
+            print(midpoint)
+            low = midpoint
