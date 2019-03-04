@@ -1,0 +1,51 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Mar  1 17:27:12 2019
+
+@author: BlackBox
+"""
+def robotCheer(): 
+    an_letters = "aefhilmnorsx"
+    word = input('Robot cheer! Enter a word: ')
+    times = input('Enthusiam level (1-10): ')
+    times = int(times)
+    
+    for letter in word:
+        if letter in an_letters:
+            print('Give me an {}! {}'.format(letter.upper(),letter.upper()))
+        else:
+            print('Give me a {}! {}'.format(letter.upper(),letter.upper()))
+    
+    print('What does that spell???')
+    for i in range(0,times):
+        print(word.upper(),'!!!!!')
+        
+
+def guess(cube,verbose=False):
+    cube = int(cube)
+    output = 0
+    for i in range(0,cube):
+        if i**3 == cube:
+            output = i
+    if output != 0:
+        print('{} is the cube root of {}'.format(output,cube))
+    else:
+        if verbose == True:
+            print('No cube root of {} found'.format(cube))
+guess(8)
+guess(16)
+guess(17)
+
+
+def guessApprox(cube,error,verbose=False):
+    cube = int(cube)
+    output = 0
+    for i in range(0,cube,error):
+        if i**3 == cube:
+            output = i
+    if output != 0:
+        print('{} is the cube root of {}'.format(output,cube))
+    else:
+        if verbose == True:
+            print('No cube root of {} found'.format(cube))
