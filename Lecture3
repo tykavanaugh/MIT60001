@@ -38,14 +38,22 @@ guess(16)
 guess(17)
 
 
-def guessApprox(cube,error,verbose=False):
+def guessApprox(cube,error=.01,verbose=False,attempts=10000):
     cube = int(cube)
-    output = 0
-    for i in range(0,cube,error):
+    isExact = False
+    error = float(error)
+    for i in range(0,cube):
         if i**3 == cube:
+            isExact = True
             output = i
-    if output != 0:
+    if isExact == True:
         print('{} is the cube root of {}'.format(output,cube))
     else:
-        if verbose == True:
-            print('No cube root of {} found'.format(cube))
+        increment = error/10
+        for i in range(0,attempts,increment):#increment by float causes error
+            if (abs(i**3)-(cube)) < error:
+                print('{} is approx the cube root of {} with {} error tolerance'.format(i,cube,increment))
+            else:
+                print('Failed within {} attempts'.format(attempts))
+
+guessApprox(100)
